@@ -339,12 +339,12 @@
   <div class="demo-inner">
     <div class="section-label">Live Prototypes</div>
     <div class="section-title">This Is What You Are Getting</div>
-    <p class="section-desc">These are not mockups. Every resource from your spreadsheet is loaded, searchable, and filterable. Switch between Region 3, Region 7, and the Region 8 reference using the tabs below. Try the Spanish (ES) button, open the education panel, and test the filters.</p>
+    <p class="section-desc">These are not mockups. Every resource from your spreadsheet is loaded, searchable, and filterable. Switch between Region 3, Region 7, and the Admin Dashboard using the tabs below. Try the Spanish (ES) button, open the education panel, and test the filters. The Admin Dashboard tab shows exactly what your team will use to manage records, sync from Google Sheets, and add or edit resources &mdash; no coding required.</p>
 
     <div class="demo-tabs">
       <button class="demo-tab active" onclick="showDemo('r3', this)">Region 3 Atlas &mdash; 177 Resources</button>
       <button class="demo-tab" onclick="showDemo('r7', this)">Region 7 Atlas &mdash; 209 Resources</button>
-      <button class="demo-tab" onclick="showDemo('r8', this)">Region 8 Reference (Live)</button>
+      <button class="demo-tab" onclick="showDemo('admin', this)">Admin Dashboard Preview</button>
     </div>
 
     <div class="demo-frame-wrap">
@@ -496,8 +496,8 @@
         <p>A React Native iOS and Android app for both regions, available in the App Store and Google Play. Particularly valuable for rural and mobile-only users. Includes offline mode, push notifications for resource updates, and GPS-based proximity filtering. This add-on can be scoped and priced separately after the web platforms are live.</p>
       </div>
       <div class="addon-price">
-        <div class="price">+$11,000</div>
-        <div class="label">Both regions, both platforms</div>
+        <div class="price">+$7,000</div>
+        <div class="label">Both regions &mdash; $3,500 per region</div>
       </div>
     </div>
 
@@ -574,7 +574,7 @@
         <tr><td>Source code transfer</td><td class="no">At contract end</td><td class="yes">At project close</td><td class="partial">Flexible</td></tr>
         <tr><td>Year 1 data updates (up to 5)</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
         <tr><td>Annual cost after Year 1</td><td>$2,400/year</td><td class="yes">~$0</td><td class="partial">Depends on hosting</td></tr>
-        <tr><td>Mobile app add-on available</td><td class="yes">Yes (+$11K)</td><td class="yes">Yes (+$11K)</td><td class="yes">Yes (+$11K)</td></tr>
+        <tr><td>Mobile app add-on available</td><td class="yes">Yes (+$7K)</td><td class="yes">Yes (+$7K)</td><td class="yes">Yes (+$7K)</td></tr>
       </tbody>
     </table>
   </div>
@@ -683,7 +683,7 @@
 
 <footer>
   <strong>OptimizED Strategic Solutions</strong> &bull; Dr. Rupak Gandhi &amp; Britney Best &bull; Proposal for ND DHHS Behavioral Health Division &bull; Regions 3 &amp; 7 &bull; June 2026 &bull;
-  <a href="https://nd-atlas.pages.dev/" target="_blank">View Region 8 Reference</a>
+  <a href="admin-demo.html" target="_blank">Preview Admin Dashboard</a>
 </footer>
 
 <script>
@@ -701,10 +701,10 @@ function showDemo(region, btn) {
     currentDemoUrl = '../region7-atlas/';
     frame.src = currentDemoUrl;
     urlBar.textContent = 'region7-atlas/ \u2014 209 resources \u2014 real data';
-  } else {
-    currentDemoUrl = 'https://nd-atlas.pages.dev/';
+  } else if (region === 'admin') {
+    currentDemoUrl = 'admin-demo.html';
     frame.src = currentDemoUrl;
-    urlBar.textContent = 'nd-atlas.pages.dev \u2014 Region 8 (live)';
+    urlBar.textContent = 'Admin Dashboard \u2014 Add, Edit, Delete, Sync from Google Sheet';
   }
 }
 function popOutDemo() {
