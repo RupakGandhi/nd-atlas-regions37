@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Region 7 Behavioral Health Resource Atlas — North Dakota</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --primary-dark: #1e40af;
+      --primary-light: #dbeafe;
+      --primary-mid: #3b82f6;
+      --accent: #f59e0b;
+      --navy: #0f172a;
+      --navy-mid: #1e293b;
+      --navy-soft: #334155;
+      --slate: #64748b;
+      --slate-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --crisis-red: #dc2626;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-xs: 6px;
+      --sidebar-w: 260px;
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --text-muted: #94a3b8;
+      --border: #334155; --border-light: #1e293b;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; transition: background 0.2s, color 0.2s; }
+
+    /* HEADER */
+    header { background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); position: sticky; top: 0; z-index: 200; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .brand-icon { width: 34px; height: 34px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .brand-icon svg { width: 18px; height: 18px; fill: white; }
+    .brand-text { line-height: 1.15; }
+    .brand-title { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; color: white; text-transform: uppercase; }
+    .brand-title span { color: var(--primary-mid); }
+    .brand-sub { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+    .header-controls { display: flex; align-items: center; gap: 6px; }
+    .lang-btn, .ctrl-btn {
+      padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.65); cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em;
+    }
+    .lang-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+    .lang-btn:hover, .ctrl-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+    .ctrl-btn { padding: 5px 9px; font-size: 13px; }
+    .saved-btn { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.65); cursor: pointer; transition: all 0.15s; }
+    .saved-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+    .saved-count { background: var(--primary); color: white; border-radius: 10px; padding: 1px 6px; font-size: 10px; display: none; }
+    .saved-count.visible { display: inline; }
+
+    /* SEARCH */
+    .search-section { background: var(--navy-mid); padding: 12px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .search-wrap { position: relative; max-width: 700px; margin: 0 auto; }
+    .search-wrap input { width: 100%; padding: 11px 16px 11px 44px; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; font-size: 14px; color: white; font-family: 'Inter', sans-serif; outline: none; transition: all 0.2s; }
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.35); }
+    .search-wrap input:focus { background: rgba(255,255,255,0.1); border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13,148,136,0.2); }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.35); font-size: 15px; pointer-events: none; }
+    .search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; font-size: 15px; display: none; padding: 2px; }
+    .search-clear.visible { display: block; }
+
+    /* HASHTAGS */
+    .hashtag-bar { background: var(--navy-mid); padding: 0 20px 12px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .hashtag { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); transition: all 0.15s; letter-spacing: 0.02em; }
+    .hashtag:hover { background: rgba(255,255,255,0.1); color: white; }
+    .hashtag.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+    /* PATHWAY TABS */
+    .pathway-tabs { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; gap: 4px; overflow-x: auto; }
+    .pathway-tab { display: flex; align-items: center; gap: 8px; padding: 14px 18px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; border: none; background: none; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .pathway-tab:hover { color: var(--primary); }
+    .pathway-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+    .pathway-tab.active .tab-dot { opacity: 1; }
+
+    /* CRISIS BANNER */
+    .crisis-banner { background: var(--crisis-red); padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .crisis-banner p { font-size: 12px; font-weight: 600; color: white; }
+    .crisis-link { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; color: white; font-size: 12px; font-weight: 700; text-decoration: none; transition: background 0.15s; }
+    .crisis-link:hover { background: rgba(255,255,255,0.3); }
+
+    /* EDUCATION PANEL */
+    .edu-panel { background: var(--card); border-bottom: 1px solid var(--border); }
+    .edu-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; cursor: pointer; user-select: none; }
+    .edu-panel-header:hover { background: var(--border-light); }
+    .edu-header-left { display: flex; align-items: center; gap: 10px; }
+    .edu-header-icon { width: 28px; height: 28px; background: var(--primary-light); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .edu-header-icon svg { width: 14px; height: 14px; stroke: var(--primary-dark); fill: none; stroke-width: 2; }
+    .edu-header-text h3 { font-size: 13px; font-weight: 700; color: var(--text); }
+    .edu-header-text p { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .edu-chevron { color: var(--text-muted); font-size: 12px; transition: transform 0.2s; }
+    .edu-chevron.open { transform: rotate(180deg); }
+    .edu-body { display: none; border-top: 1px solid var(--border); }
+    .edu-body.open { display: block; }
+    .edu-tabs-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 20px; overflow-x: auto; }
+    .edu-tab { padding: 12px 16px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; white-space: nowrap; }
+    .edu-tab:hover { color: var(--primary); }
+    .edu-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .edu-content { display: none; padding: 20px; max-width: 900px; }
+    .edu-content.active { display: block; }
+    .edu-content h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .edu-content p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+    .edu-content ul { padding-left: 20px; margin-bottom: 10px; }
+    .edu-content li { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 4px; }
+    .edu-note { padding: 12px 16px; background: #fefce8; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 12px; color: #78350f; line-height: 1.6; margin-top: 12px; }
+    .continuum-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 12px; }
+    .continuum-card { padding: 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+    .continuum-card:hover { border-color: var(--primary); background: var(--primary-light); }
+    .continuum-card h5 { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .continuum-card p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+    .def-item { margin-bottom: 12px; padding: 12px 14px; background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .def-item h5 { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .def-item p { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+    .contact-card { padding: 14px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 12px; }
+    .contact-card .contact-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .contact-card .contact-title { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .contact-card .contact-info { font-size: 13px; margin-top: 8px; }
+    .contact-card a { color: var(--primary); text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* MAIN LAYOUT */
+    .main-layout { display: flex; min-height: calc(100vh - 200px); }
+
+    /* SIDEBAR */
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; background: var(--card); border-right: 1px solid var(--border); padding: 16px 0; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+    .sidebar-title { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 8px 16px 6px; display: flex; align-items: center; gap: 6px; }
+    .sidebar-title::before { content: ''; display: inline-block; width: 3px; height: 12px; background: var(--primary); border-radius: 2px; }
+    .cat-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 8px 16px; background: none; border: none; text-align: left; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.12s; gap: 8px; }
+    .cat-btn:hover { background: var(--border-light); color: var(--text); }
+    .cat-btn.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
+    .cat-btn .cat-name { flex: 1; }
+    .cat-count { font-size: 10px; font-weight: 700; background: var(--border-light); color: var(--text-muted); padding: 1px 7px; border-radius: 10px; flex-shrink: 0; }
+    .cat-btn.active .cat-count { background: var(--primary); color: white; }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 8px 0; }
+    .filter-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 5px; }
+    .filter-select { width: 100%; padding: 7px 10px; border: 1.5px solid var(--border); border-radius: var(--radius-xs); font-size: 12px; font-family: 'Inter', sans-serif; background: var(--card); color: var(--text); cursor: pointer; outline: none; margin-bottom: 10px; transition: border-color 0.15s; }
+    .filter-select:focus { border-color: var(--primary); }
+    .reset-btn { width: 100%; padding: 8px; background: var(--border-light); border: 1px solid var(--border); border-radius: var(--radius-xs); font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+    .reset-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+    .sidebar-section { padding: 0 16px 16px; }
+
+    /* CONTENT */
+    .content { flex: 1; min-width: 0; }
+    .results-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--card); gap: 12px; flex-wrap: wrap; }
+    .results-count { font-size: 13px; font-weight: 700; color: var(--primary); }
+    .results-count span { color: var(--text-muted); font-weight: 400; }
+    .results-actions { display: flex; gap: 8px; }
+    .action-btn { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: var(--radius-xs); font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: var(--card); color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+    .action-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* RESOURCE GRID */
+    .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; padding: 16px 20px 32px; }
+
+    /* RESOURCE CARD */
+    .resource-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s; position: relative; }
+    .resource-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--primary); }
+    .card-category { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+    .card-category::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .card-name { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .card-service { font-size: 12px; color: var(--text-muted); }
+    .card-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+    .meta-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 500; background: var(--border-light); color: var(--text-muted); }
+    .meta-chip svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; border-top: 1px solid var(--border-light); margin-top: auto; }
+    .card-actions { display: flex; gap: 6px; }
+    .card-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: var(--radius-xs); font-size: 11px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); background: var(--card); color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+    .card-btn.call { border-color: #d1fae5; background: #f0fdf4; color: #15803d; }
+    .card-btn.call:hover { background: #15803d; color: white; border-color: #15803d; }
+    .card-btn.email { border-color: #fef3c7; background: #fffbeb; color: #b45309; }
+    .card-btn.email:hover { background: #b45309; color: white; border-color: #b45309; }
+    .save-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
+    .save-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .save-btn.saved { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .save-btn svg { width: 14px; height: 14px; }
+
+    /* REGION BADGE */
+    .region-badge { display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .region-badge.r3 { background: var(--primary-light); color: var(--primary-dark); }
+    .region-badge.statewide { background: #fef3c7; color: #92400e; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--card); border-radius: 16px; max-width: 580px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); position: relative; }
+    .modal-header { padding: 20px 20px 16px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--card); z-index: 1; }
+    .modal-category { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); margin-bottom: 6px; }
+    .modal-title { font-size: 18px; font-weight: 800; color: var(--text); line-height: 1.2; padding-right: 36px; }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.15s; }
+    .modal-close:hover { background: var(--border-light); color: var(--text); }
+    .modal-body { padding: 16px 20px 20px; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field-label { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; display: block; }
+    .modal-field-value { font-size: 13px; color: var(--text); line-height: 1.55; }
+    .modal-field-value a { color: var(--primary); text-decoration: none; }
+    .modal-field-value a:hover { text-decoration: underline; }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+    .modal-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; }
+    .modal-btn-primary { background: var(--primary); color: white; }
+    .modal-btn-primary:hover { background: var(--primary-dark); }
+    .modal-btn-secondary { background: var(--border-light); color: var(--text); border: 1px solid var(--border); }
+    .modal-btn-secondary:hover { background: var(--border); }
+    .spec-pop-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .spec-pop-tag { padding: 2px 8px; background: var(--primary-light); color: var(--primary-dark); border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+    /* SAVED PANEL */
+    .saved-panel { display: none; position: fixed; top: 56px; right: 0; width: 320px; height: calc(100vh - 56px); background: var(--card); border-left: 1px solid var(--border); z-index: 150; flex-direction: column; box-shadow: var(--shadow-lg); }
+    .saved-panel.open { display: flex; }
+    .saved-panel-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .saved-panel-header h3 { font-size: 14px; font-weight: 700; }
+    .saved-panel-body { flex: 1; overflow-y: auto; padding: 12px; }
+    .saved-panel-footer { padding: 12px; border-top: 1px solid var(--border); }
+    .export-all-btn { width: 100%; padding: 10px; background: var(--primary); border: none; border-radius: var(--radius-sm); color: white; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .export-all-btn:hover { background: var(--primary-dark); }
+    .saved-item { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; cursor: pointer; }
+    .saved-item:hover { border-color: var(--primary); }
+    .saved-item-name { font-size: 13px; font-weight: 600; }
+    .saved-item-cat { font-size: 10px; color: var(--primary); font-weight: 600; margin-top: 2px; }
+    .saved-item-phone { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .saved-empty { text-align: center; padding: 40px 16px; color: var(--text-muted); font-size: 13px; }
+
+    /* EMPTY STATE */
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 24px; color: var(--text-muted); }
+    .empty-icon { width: 48px; height: 48px; margin: 0 auto 16px; opacity: 0.3; }
+    .empty-icon svg { width: 48px; height: 48px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
+    .empty-state h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .empty-state p { font-size: 13px; }
+
+    /* LOAD MORE */
+    .load-more-wrap { text-align: center; padding: 20px; grid-column: 1 / -1; }
+    .load-more-btn { padding: 10px 28px; background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+    .load-more-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* FOOTER */
+    footer { background: var(--navy-mid); color: rgba(255,255,255,0.5); padding: 24px 20px; text-align: center; font-size: 11px; line-height: 1.8; }
+    footer strong { color: rgba(255,255,255,0.8); }
+    footer a { color: var(--primary-mid); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* MOBILE */
+    .mobile-filter-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 100; padding: 12px 20px; background: var(--primary); color: white; border: none; border-radius: 24px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: var(--shadow-lg); gap: 6px; align-items: center; }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .sidebar.mobile-open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; width: 280px; height: 100vh; z-index: 300; }
+      .mobile-filter-toggle { display: flex; }
+      .resource-grid { grid-template-columns: 1fr; padding: 12px; }
+      .header-controls .lang-btn { display: none; }
+      .brand-sub { display: none; }
+      .modal-grid { grid-template-columns: 1fr; }
+      .continuum-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media print {
+      header, .search-section, .hashtag-bar, .pathway-tabs, .sidebar, .mobile-filter-toggle, .saved-panel, .results-actions { display: none !important; }
+      .main-layout { display: block; }
+      .resource-grid { grid-template-columns: 1fr 1fr; }
+      .resource-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/></svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">ND Resource <span>Atlas</span></div>
+        <div class="brand-sub" data-i18n="brand_sub">Region 7 Behavioral Health</div>
+      </div>
+    </a>
+    <div class="header-controls">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="ctrl-btn" onclick="toggleDark()" title="Toggle dark mode" id="dark-btn">&#9790;</button>
+      <button class="saved-btn" onclick="toggleSavedPanel()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span data-i18n="saved_label">Saved</span>
+        <span class="saved-count" id="savedCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="search-section">
+  <div class="search-wrap">
+    <span class="search-icon">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </span>
+    <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="Search by organization, service, or city..." oninput="onSearch(this)" />
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">&#215;</button>
+  </div>
+</div>
+
+<div class="hashtag-bar" id="hashtagBar"></div>
+
+<div class="pathway-tabs" id="pathwayTabs">
+  <button class="pathway-tab active" data-pathway="all" onclick="setPathway('all', this)">
+    <span class="tab-dot"></span> <span data-i18n="path_all">All Resources</span>
+  </button>
+  <button class="pathway-tab" data-pathway="Clinical & Treatment Services" onclick="setPathway('Clinical & Treatment Services', this)">
+    <span class="tab-dot"></span> <span data-i18n="path_clinical">Clinical &amp; Treatment</span>
+  </button>
+  <button class="pathway-tab" data-pathway="Prevention & Youth Services" onclick="setPathway('Prevention & Youth Services', this)">
+    <span class="tab-dot"></span> <span data-i18n="path_prevention">Prevention &amp; Youth</span>
+  </button>
+  <button class="pathway-tab" data-pathway="Community & Support Services" onclick="setPathway('Community & Support Services', this)">
+    <span class="tab-dot"></span> <span data-i18n="path_community">Community &amp; Support</span>
+  </button>
+</div>
+
+<div class="crisis-banner">
+  <p data-i18n="crisis_text">If you or someone you know is in crisis:</p>
+  <a class="crisis-link" href="tel:988" data-i18n="crisis_988">Call or Text 988</a>
+  <a class="crisis-link" href="tel:18882754673">1-888-275-4673</a>
+  <a class="crisis-link" href="sms:741741" data-i18n="crisis_text_home">Text HOME to 741741</a>
+</div>
+
+<!-- EDUCATION PANEL -->
+<div class="edu-panel">
+  <div class="edu-panel-header" onclick="toggleEduPanel()" id="edu-panel-header">
+    <div class="edu-header-left">
+      <div class="edu-header-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="edu-header-text">
+        <h3 data-i18n="edu_title">Understanding the Continuum of Care</h3>
+        <p data-i18n="edu_subtitle">How to use this directory &bull; Service definitions &bull; About this resource</p>
+      </div>
+    </div>
+    <span class="edu-chevron" id="edu-chevron">&#8964;</span>
+  </div>
+  <div class="edu-body" id="edu-body">
+    <div class="edu-tabs-bar">
+      <button class="edu-tab active" onclick="showEduTab('howto', this)" data-i18n="edu_tab_howto">How to Use</button>
+      <button class="edu-tab" onclick="showEduTab('continuum', this)" data-i18n="edu_tab_continuum">Continuum of Care</button>
+      <button class="edu-tab" onclick="showEduTab('definitions', this)" data-i18n="edu_tab_defs">Service Definitions</button>
+      <button class="edu-tab" onclick="showEduTab('about', this)" data-i18n="edu_tab_about">About This Directory</button>
+    </div>
+    <div class="edu-content active" id="edu-howto">
+      <h4 data-i18n="howto_h1">How to Find the Right Resource</h4>
+      <p data-i18n="howto_p1">This directory includes behavioral health resources for children, youth, and families in Region 7 (Southeast North Dakota) and statewide providers. Use the filters on the left to narrow your search by service type, setting, or age group.</p>
+      <h4 style="margin-top:14px;" data-i18n="howto_h2">Tips for Navigating This Directory</h4>
+      <ul>
+        <li data-i18n="howto_li1">Use the <strong>Care Pathway</strong> tabs above to filter by Clinical &amp; Treatment, Prevention &amp; Youth, or Community &amp; Support services</li>
+        <li data-i18n="howto_li2">Search by organization name, city, or service type in the search bar</li>
+        <li data-i18n="howto_li3">Click any resource card to see full details including contact information and payment options</li>
+        <li data-i18n="howto_li4">Use the <strong>Save</strong> button to bookmark resources and export a personalized list</li>
+        <li data-i18n="howto_li5">One organization may appear multiple times if it provides more than one service type</li>
+        <li data-i18n="howto_li6">Statewide resources serve families across all regions of North Dakota</li>
+      </ul>
+      <div class="edu-note" data-i18n="howto_disclaimer">
+        <strong>Disclaimer:</strong> This directory was last updated Spring 2026 by the System of Care Grant team. Resources are limited to the knowledge of the committee at the time of creation. For questions or updates, contact Katie Houle at <a href="mailto:khoule@nd.gov">khoule@nd.gov</a>.
+      </div>
+    </div>
+    <div class="edu-content" id="edu-continuum">
+      <h4 data-i18n="continuum_h1">Region 7 Continuum of Care</h4>
+      <p data-i18n="continuum_p1">The continuum of care represents the full range of services available to children, youth, and families — from early prevention and wellness through intensive inpatient treatment. Services are organized from least to most intensive. Click any level to filter resources.</p>
+      <div class="continuum-grid">
+        <div class="continuum-card" onclick="filterByContinuum('Prevention & Early Intervention')">
+          <h5 data-i18n="cont_prev">Prevention &amp; Early Intervention</h5>
+          <p data-i18n="cont_prev_desc">Social-emotional learning, early childhood supports, and community wellness programs that build resilience before problems arise.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Service Coordination')">
+          <h5 data-i18n="cont_coord">Service Coordination</h5>
+          <p data-i18n="cont_coord_desc">Telephonic or in-person care coordination connecting individuals and families with appropriate services, including FOCUS and Wraparound.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Outpatient & Integrated Care')">
+          <h5 data-i18n="cont_out">Outpatient &amp; Integrated Care</h5>
+          <p data-i18n="cont_out_desc">Individual, group, and family therapy; medication management; and integrated behavioral health in primary care settings.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Intensive Home & Community')">
+          <h5 data-i18n="cont_int">Intensive Home &amp; Community</h5>
+          <p data-i18n="cont_int_desc">In-home services, intensive outpatient, partial hospitalization, MST, FFT, and wraparound care coordination for complex needs.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Crisis Care')">
+          <h5 data-i18n="cont_crisis">Comprehensive Crisis Care</h5>
+          <p data-i18n="cont_crisis_desc">988 crisis line, mobile crisis teams, crisis stabilization units, and emergency shelter services for immediate intervention.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Inpatient Care')">
+          <h5 data-i18n="cont_inp">Inpatient Care</h5>
+          <p data-i18n="cont_inp_desc">Acute inpatient psychiatric treatment for individuals requiring 24-hour clinical supervision and stabilization.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Residential Treatment')">
+          <h5 data-i18n="cont_res">Residential Treatment</h5>
+          <p data-i18n="cont_res_desc">PRTF, QRTP, and therapeutic group homes for youth requiring structured, clinically intensive residential care.</p>
+        </div>
+        <div class="continuum-card" onclick="filterByContinuum('Peer-Led Services')">
+          <h5 data-i18n="cont_peer">Peer-Led Services</h5>
+          <p data-i18n="cont_peer_desc">Family and youth-led services including parent peer support, mentoring, training, and advocacy across the continuum.</p>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-muted);" data-i18n="continuum_crosscut">
+        <strong>Crosscutting Services:</strong> ND Federation of Families for Children's Mental Health, Family Voices of ND, Family Services Network (Parent Peer Support), and Special Education / School-based behavioral health services support families across all levels of the continuum.
+      </p>
+    </div>
+    <div class="edu-content" id="edu-definitions">
+      <h4 data-i18n="defs_h1">Service Type Definitions</h4>
+      <p data-i18n="defs_p1">Understanding what each service type means can help you identify the right level of care for a child, youth, or family member.</p>
+      <div id="definitions-list"></div>
+    </div>
+    <div class="edu-content" id="edu-about">
+      <h4 data-i18n="about_h1">About This Directory</h4>
+      <p data-i18n="about_p1">This resource directory was developed by the North Dakota Department of Health and Human Services, Behavioral Health Division, in partnership with the Region 7 System of Care Grant steering committee.</p>
+      <p data-i18n="about_p2">The directory is designed to make behavioral health services accessible to professionals, families, and community members in the Southeast region of North Dakota, covering <strong>Cass, Ransom, Richland, Sargent, Dickey, and LaMoure counties</strong>.</p>
+      <p data-i18n="about_p3">Region 7 serves the Fargo-Moorhead metro area and surrounding rural Southeast ND counties. Statewide resources and tribal resources are included throughout this directory.</p>
+      <div class="contact-card">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:8px;" data-i18n="about_contact_label">Primary Contact</div>
+        <div class="contact-name" data-i18n="about_contact_name">Katie Houle, LMSW</div>
+        <div class="contact-title" data-i18n="about_contact_title">Clinical Administrator, System of Care &mdash; ND DHHS Behavioral Health Division</div>
+        <div class="contact-info">
+          <a href="mailto:khoule@nd.gov">khoule@nd.gov</a> &bull; (701) 328-8832<br>
+          <a href="https://hhs.nd.gov/behavioral-health" target="_blank">hhs.nd.gov/behavioral-health</a>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-muted);" data-i18n="about_soc">
+        This project is supported by the <strong>Children's Mental Health Initiative (CMHI) System of Care grant</strong>. The 2023 System of Care Needs Assessment, which guided this implementation, is available at <a href="https://www.hhs.nd.gov" target="_blank" style="color:var(--primary);">hhs.nd.gov</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title" data-i18n="sidebar_categories">Categories</div>
+    <div id="categoryList"></div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <label class="filter-label" data-i18n="filter_setting">Setting</label>
+      <select class="filter-select" id="settingFilter" onchange="applyFilters()">
+        <option value="" data-i18n="filter_all_settings">All Settings</option>
+        <option>Office/Clinic-based</option>
+        <option>Community-based</option>
+        <option>Telehealth</option>
+        <option>Residential</option>
+        <option>School-based</option>
+      </select>
+      <label class="filter-label" data-i18n="filter_age">Age Group</label>
+      <select class="filter-select" id="ageFilter" onchange="applyFilters()">
+        <option value="" data-i18n="filter_all_ages">All Ages</option>
+        <option>Infants and Young Children (0-5)</option>
+        <option>Children (6-12)</option>
+        <option>Children and Youth (6-17)</option>
+        <option>Infants, Children and Youth (0-17)</option>
+        <option>Youth (13-17)</option>
+        <option>Young Adults (18-24)</option>
+        <option>Adults (18+)</option>
+        <option>All ages</option>
+      </select>
+      <label class="filter-label" data-i18n="filter_city">City</label>
+      <select class="filter-select" id="cityFilter" onchange="applyFilters()">
+        <option value="" data-i18n="filter_all_cities">All Cities</option>
+      </select>
+      <button class="reset-btn" onclick="resetAll()" data-i18n="reset_filters">Reset All Filters</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="results-bar">
+      <div class="results-count" id="resultsCount">Loading...</div>
+      <div class="results-actions">
+        <button class="action-btn" onclick="window.print()" data-i18n="btn_print">Print</button>
+        <button class="action-btn" onclick="exportCSV()" data-i18n="btn_export">Export CSV</button>
+      </div>
+    </div>
+    <div class="resource-grid" id="resourceGrid"></div>
+  </main>
+</div>
+
+<div class="saved-panel" id="savedPanel">
+  <div class="saved-panel-header">
+    <h3 data-i18n="saved_panel_title">Saved Resources</h3>
+    <button class="modal-close" onclick="toggleSavedPanel()">&#215;</button>
+  </div>
+  <div class="saved-panel-body" id="savedPanelBody">
+    <div class="saved-empty" data-i18n="saved_empty">No saved resources yet. Click the bookmark icon on any card to save.</div>
+  </div>
+  <div class="saved-panel-footer">
+    <button class="export-all-btn" onclick="exportSaved()" data-i18n="export_saved">Export Saved List</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-header">
+      <div class="modal-category" id="modalCategory"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <button class="modal-close" onclick="closeModal()">&#215;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<button class="mobile-filter-toggle" onclick="toggleMobileSidebar()" data-i18n="btn_filters">Filters</button>
+
+<footer>
+  <strong>Region 7 Behavioral Health Resource Atlas</strong><br>
+  Cass Benson &bull; Cavalier &bull; Eddy &bull; Ramsey &bull; Rolette &bull; Towner Countiesbull; Ransom Benson &bull; Cavalier &bull; Eddy &bull; Ramsey &bull; Rolette &bull; Towner Countiesbull; Richland Benson &bull; Cavalier &bull; Eddy &bull; Ramsey &bull; Rolette &bull; Towner Countiesbull; Sargent Benson &bull; Cavalier &bull; Eddy &bull; Ramsey &bull; Rolette &bull; Towner Countiesbull; Dickey Benson &bull; Cavalier &bull; Eddy &bull; Ramsey &bull; Rolette &bull; Towner Countiesbull; LaMoure Counties &bull; North Dakota<br>
+  Maintained by the ND DHHS Behavioral Health Division, System of Care Program &bull;
+  <a href="https://hhs.nd.gov/behavioral-health" target="_blank">hhs.nd.gov/behavioral-health</a><br>
+  <span style="font-size:10px;opacity:0.7;">Resources are limited to the knowledge of the committee at the time of creation. Last updated Spring 2026.</span>
+</footer>
+
+<script src="data.js"></script>
+<script>
+// ===================================================
+// TRANSLATIONS
+// ===================================================
+const T = {
+  en: {
+    brand_sub: 'Region 7 Behavioral Health',
+    search_placeholder: 'Search by organization, service, or city...',
+    saved_label: 'Saved',
+    path_all: 'All Resources',
+    path_clinical: 'Clinical & Treatment',
+    path_prevention: 'Prevention & Youth',
+    path_community: 'Community & Support',
+    crisis_text: 'If you or someone you know is in crisis:',
+    crisis_988: 'Call or Text 988',
+    crisis_text_home: 'Text HOME to 741741',
+    edu_title: 'Understanding the Continuum of Care',
+    edu_subtitle: 'How to use this directory \u2022 Service definitions \u2022 About this resource',
+    edu_tab_howto: 'How to Use',
+    edu_tab_continuum: 'Continuum of Care',
+    edu_tab_defs: 'Service Definitions',
+    edu_tab_about: 'About This Directory',
+    howto_h1: 'How to Find the Right Resource',
+    howto_p1: 'This directory includes behavioral health resources for children, youth, and families in Region 7 (Southeast North Dakota) and statewide providers. Use the filters on the left to narrow your search by service type, setting, or age group.',
+    howto_h2: 'Tips for Navigating This Directory',
+    howto_li1: 'Use the Care Pathway tabs above to filter by Clinical & Treatment, Prevention & Youth, or Community & Support services',
+    howto_li2: 'Search by organization name, city, or service type in the search bar',
+    howto_li3: 'Click any resource card to see full details including contact information and payment options',
+    howto_li4: 'Use the Save button to bookmark resources and export a personalized list',
+    howto_li5: 'One organization may appear multiple times if it provides more than one service type',
+    howto_li6: 'Statewide resources serve families across all regions of North Dakota',
+    howto_disclaimer: '<strong>Disclaimer:</strong> This directory was last updated Spring 2026 by the System of Care Grant team. Resources are limited to the knowledge of the committee at the time of creation. For questions or updates, contact Katie Houle at <a href="mailto:khoule@nd.gov">khoule@nd.gov</a>.',
+    continuum_h1: 'Region 7 Continuum of Care',
+    continuum_p1: 'The continuum of care represents the full range of services available to children, youth, and families \u2014 from early prevention and wellness through intensive inpatient treatment. Services are organized from least to most intensive. Click any level to filter resources.',
+    continuum_crosscut: '<strong>Crosscutting Services:</strong> ND Federation of Families for Children\'s Mental Health, Family Voices of ND, Family Services Network (Parent Peer Support), and Special Education / School-based behavioral health services support families across all levels of the continuum.',
+    cont_prev: 'Prevention & Early Intervention',
+    cont_prev_desc: 'Social-emotional learning, early childhood supports, and community wellness programs that build resilience before problems arise.',
+    cont_coord: 'Service Coordination',
+    cont_coord_desc: 'Telephonic or in-person care coordination connecting individuals and families with appropriate services, including FOCUS and Wraparound.',
+    cont_out: 'Outpatient & Integrated Care',
+    cont_out_desc: 'Individual, group, and family therapy; medication management; and integrated behavioral health in primary care settings.',
+    cont_int: 'Intensive Home & Community',
+    cont_int_desc: 'In-home services, intensive outpatient, partial hospitalization, MST, FFT, and wraparound care coordination for complex needs.',
+    cont_crisis: 'Comprehensive Crisis Care',
+    cont_crisis_desc: '988 crisis line, mobile crisis teams, crisis stabilization units, and emergency shelter services for immediate intervention.',
+    cont_inp: 'Inpatient Care',
+    cont_inp_desc: 'Acute inpatient psychiatric treatment for individuals requiring 24-hour clinical supervision and stabilization.',
+    cont_res: 'Residential Treatment',
+    cont_res_desc: 'PRTF, QRTP, and therapeutic group homes for youth requiring structured, clinically intensive residential care.',
+    cont_peer: 'Peer-Led Services',
+    cont_peer_desc: 'Family and youth-led services including parent peer support, mentoring, training, and advocacy across the continuum.',
+    defs_h1: 'Service Type Definitions',
+    defs_p1: 'Understanding what each service type means can help you identify the right level of care for a child, youth, or family member.',
+    about_h1: 'About This Directory',
+    about_p1: 'This resource directory was developed by the North Dakota Department of Health and Human Services, Behavioral Health Division, in partnership with the Region 7 System of Care Grant steering committee.',
+    about_p2: 'The directory is designed to make behavioral health services accessible to professionals, families, and community members in the Southeast region of North Dakota, covering <strong>Cass, Ransom, Richland, Sargent, Dickey, and LaMoure counties</strong>.',
+    about_p3: 'Region 7 serves the Fargo-Moorhead metro area and surrounding rural Southeast ND counties. Statewide resources and tribal resources are included throughout this directory.',
+    about_contact_label: 'Primary Contact',
+    about_contact_name: 'Katie Houle, LMSW',
+    about_contact_title: 'Clinical Administrator, System of Care \u2014 ND DHHS Behavioral Health Division',
+    about_soc: 'This project is supported by the <strong>Children\'s Mental Health Initiative (CMHI) System of Care grant</strong>. The 2023 System of Care Needs Assessment, which guided this implementation, is available at <a href="https://www.hhs.nd.gov" target="_blank" style="color:var(--primary);">hhs.nd.gov</a>.',
+    sidebar_categories: 'Categories',
+    filter_setting: 'Setting',
+    filter_all_settings: 'All Settings',
+    filter_age: 'Age Group',
+    filter_all_ages: 'All Ages',
+    filter_city: 'City',
+    filter_all_cities: 'All Cities',
+    reset_filters: 'Reset All Filters',
+    btn_print: 'Print',
+    btn_export: 'Export CSV',
+    btn_filters: 'Filters',
+    saved_panel_title: 'Saved Resources',
+    saved_empty: 'No saved resources yet. Click the bookmark icon on any card to save.',
+    export_saved: 'Export Saved List',
+  },
+  es: {
+    brand_sub: 'Salud Conductual Regi\u00f3n 3',
+    search_placeholder: 'Buscar por organizaci\u00f3n, servicio o ciudad...',
+    saved_label: 'Guardados',
+    path_all: 'Todos los Recursos',
+    path_clinical: 'Cl\u00ednico y Tratamiento',
+    path_prevention: 'Prevenci\u00f3n y Juventud',
+    path_community: 'Comunidad y Apoyo',
+    crisis_text: 'Si usted o alguien que conoce est\u00e1 en crisis:',
+    crisis_988: 'Llame o env\u00ede un mensaje al 988',
+    crisis_text_home: 'Env\u00ede HOME al 741741',
+    edu_title: 'Entendiendo el Continuo de Atenci\u00f3n',
+    edu_subtitle: 'C\u00f3mo usar este directorio \u2022 Definiciones de servicios \u2022 Acerca de este recurso',
+    edu_tab_howto: 'C\u00f3mo Usar',
+    edu_tab_continuum: 'Continuo de Atenci\u00f3n',
+    edu_tab_defs: 'Definiciones',
+    edu_tab_about: 'Acerca de',
+    howto_h1: 'C\u00f3mo Encontrar el Recurso Correcto',
+    howto_p1: 'Este directorio incluye recursos de salud conductual para ni\u00f1os, j\u00f3venes y familias en la Regi\u00f3n 3 (Regi\u00f3n del Lago, Dakota del Norte) y proveedores estatales.',
+    howto_h2: 'Consejos para Navegar Este Directorio',
+    howto_li1: 'Use las pesta\u00f1as de V\u00eda de Atenci\u00f3n para filtrar por servicios Cl\u00ednicos, de Prevenci\u00f3n o Comunitarios',
+    howto_li2: 'Busque por nombre de organizaci\u00f3n, ciudad o tipo de servicio',
+    howto_li3: 'Haga clic en cualquier tarjeta para ver detalles completos incluyendo informaci\u00f3n de contacto',
+    howto_li4: 'Use el bot\u00f3n Guardar para marcar recursos y exportar una lista personalizada',
+    howto_li5: 'Una organizaci\u00f3n puede aparecer varias veces si ofrece m\u00e1s de un tipo de servicio',
+    howto_li6: 'Los recursos estatales sirven a familias en todas las regiones de Dakota del Norte',
+    howto_disclaimer: '<strong>Aviso:</strong> Este directorio fue actualizado en primavera de 2026. Para preguntas, contacte a Katie Houle en <a href="mailto:khoule@nd.gov">khoule@nd.gov</a>.',
+    continuum_h1: 'Continuo de Atenci\u00f3n Regi\u00f3n 7',
+    continuum_p1: 'El continuo de atenci\u00f3n representa la gama completa de servicios desde la prevenci\u00f3n temprana hasta el tratamiento intensivo. Haga clic en cualquier nivel para filtrar recursos.',
+    continuum_crosscut: '<strong>Servicios Transversales:</strong> Federaci\u00f3n ND de Familias para la Salud Mental Infantil, Voces Familiares de ND, Red de Servicios Familiares (Apoyo entre Pares para Padres) y servicios de salud conductual en escuelas.',
+    cont_prev: 'Prevenci\u00f3n e Intervenci\u00f3n Temprana',
+    cont_prev_desc: 'Aprendizaje socioemocional, apoyos para la primera infancia y programas de bienestar comunitario.',
+    cont_coord: 'Coordinaci\u00f3n de Servicios',
+    cont_coord_desc: 'Coordinaci\u00f3n de atenci\u00f3n telef\u00f3nica o presencial que conecta a personas y familias con servicios apropiados.',
+    cont_out: 'Atenci\u00f3n Ambulatoria e Integrada',
+    cont_out_desc: 'Terapia individual, grupal y familiar; manejo de medicamentos; y salud conductual integrada.',
+    cont_int: 'Servicios Intensivos en el Hogar y la Comunidad',
+    cont_int_desc: 'Servicios en el hogar, atenci\u00f3n ambulatoria intensiva, hospitalizaci\u00f3n parcial y coordinaci\u00f3n de atenci\u00f3n integral.',
+    cont_crisis: 'Atenci\u00f3n Integral de Crisis',
+    cont_crisis_desc: 'L\u00ednea de crisis 988, equipos m\u00f3viles de crisis, estabilizaci\u00f3n de crisis y servicios de refugio de emergencia.',
+    cont_inp: 'Atenci\u00f3n Hospitalaria',
+    cont_inp_desc: 'Tratamiento psiqui\u00e1trico hospitalario agudo para personas que requieren supervisi\u00f3n cl\u00ednica las 24 horas.',
+    cont_res: 'Tratamiento Residencial',
+    cont_res_desc: 'PRTF, QRTP y hogares grupales terap\u00e9uticos para j\u00f3venes que requieren atenci\u00f3n residencial estructurada.',
+    cont_peer: 'Servicios Liderados por Pares',
+    cont_peer_desc: 'Servicios liderados por familias y j\u00f3venes incluyendo apoyo entre pares para padres, mentoring y defensa.',
+    defs_h1: 'Definiciones de Tipos de Servicio',
+    defs_p1: 'Comprender qu\u00e9 significa cada tipo de servicio puede ayudarle a identificar el nivel de atenci\u00f3n adecuado.',
+    about_h1: 'Acerca de Este Directorio',
+    about_p1: 'Este directorio fue desarrollado por el Departamento de Salud y Servicios Humanos de Dakota del Norte, Divisi\u00f3n de Salud Conductual.',
+    about_p2: 'Cubre los condados de <strong>Cass, Ransom, Richland, Sargent, Dickey y LaMoure</strong> en el sureste de Dakota del Norte.',
+    about_p3: 'La Regi\u00f3n 7 sirve al área metropolitana de Fargo-Moorhead y los condados rurales del sureste de Dakota del Norte.',
+    about_contact_label: 'Contacto Principal',
+    about_contact_name: 'Katie Houle, LMSW',
+    about_contact_title: 'Administradora Cl\u00ednica, Sistema de Atenci\u00f3n \u2014 Divisi\u00f3n de Salud Conductual de ND DHHS',
+    about_soc: 'Este proyecto est\u00e1 apoyado por la <strong>subvenci\u00f3n del Sistema de Atenci\u00f3n de la Iniciativa de Salud Mental Infantil (CMHI)</strong>.',
+    sidebar_categories: 'Categor\u00edas',
+    filter_setting: 'Entorno',
+    filter_all_settings: 'Todos los Entornos',
+    filter_age: 'Grupo de Edad',
+    filter_all_ages: 'Todas las Edades',
+    filter_city: 'Ciudad',
+    filter_all_cities: 'Todas las Ciudades',
+    reset_filters: 'Restablecer Filtros',
+    btn_print: 'Imprimir',
+    btn_export: 'Exportar CSV',
+    btn_filters: 'Filtros',
+    saved_panel_title: 'Recursos Guardados',
+    saved_empty: 'No hay recursos guardados. Haga clic en el icono de marcador para guardar.',
+    export_saved: 'Exportar Lista Guardada',
+  },
+  fr: {
+    brand_sub: 'Sant\u00e9 Comportementale R\u00e9gion 3',
+    search_placeholder: 'Rechercher par organisation, service ou ville...',
+    saved_label: 'Enregistr\u00e9s',
+    path_all: 'Toutes les Ressources',
+    path_clinical: 'Clinique et Traitement',
+    path_prevention: 'Pr\u00e9vention et Jeunesse',
+    path_community: 'Communaut\u00e9 et Soutien',
+    crisis_text: 'Si vous ou quelqu\'un que vous connaissez est en crise\u00a0:',
+    crisis_988: 'Appelez ou envoyez un message au 988',
+    crisis_text_home: 'Envoyez HOME au 741741',
+    edu_title: 'Comprendre le Continuum de Soins',
+    edu_subtitle: 'Comment utiliser ce r\u00e9pertoire \u2022 D\u00e9finitions des services \u2022 \u00c0 propos',
+    edu_tab_howto: 'Comment Utiliser',
+    edu_tab_continuum: 'Continuum de Soins',
+    edu_tab_defs: 'D\u00e9finitions',
+    edu_tab_about: '\u00c0 Propos',
+    howto_h1: 'Comment Trouver la Bonne Ressource',
+    howto_p1: 'Ce r\u00e9pertoire comprend des ressources en sant\u00e9 comportementale pour les enfants, les jeunes et les familles de la R\u00e9gion 3 et les prestataires \u00e0 l\u2019\u00e9chelle de l\u2019\u00e9tat.',
+    howto_h2: 'Conseils pour Naviguer dans ce R\u00e9pertoire',
+    howto_li1: 'Utilisez les onglets Parcours de Soins pour filtrer par services Cliniques, de Pr\u00e9vention ou Communautaires',
+    howto_li2: 'Recherchez par nom d\u2019organisation, ville ou type de service',
+    howto_li3: 'Cliquez sur n\u2019importe quelle carte pour voir les d\u00e9tails complets',
+    howto_li4: 'Utilisez le bouton Enregistrer pour marquer les ressources et exporter une liste personnalis\u00e9e',
+    howto_li5: 'Une organisation peut appara\u00eetre plusieurs fois si elle fournit plus d\u2019un type de service',
+    howto_li6: 'Les ressources \u00e0 l\u2019\u00e9chelle de l\u2019\u00e9tat servent les familles dans toutes les r\u00e9gions',
+    howto_disclaimer: '<strong>Avis\u00a0:</strong> Ce r\u00e9pertoire a \u00e9t\u00e9 mis \u00e0 jour au printemps 2026. Pour toute question, contactez Katie Houle \u00e0 <a href="mailto:khoule@nd.gov">khoule@nd.gov</a>.',
+    continuum_h1: 'Continuum de Soins R\u00e9gion 7',
+    continuum_p1: 'Le continuum de soins repr\u00e9sente la gamme compl\u00e8te de services de la pr\u00e9vention pr\u00e9coce au traitement intensif. Cliquez sur n\u2019importe quel niveau pour filtrer les ressources.',
+    continuum_crosscut: '<strong>Services transversaux\u00a0:</strong> F\u00e9d\u00e9ration ND des familles pour la sant\u00e9 mentale des enfants, Voix des familles du ND, R\u00e9seau de services aux familles et services de sant\u00e9 comportementale en milieu scolaire.',
+    cont_prev: 'Pr\u00e9vention et Intervention Pr\u00e9coce',
+    cont_prev_desc: 'Apprentissage socio\u00e9motionnel, soutiens \u00e0 la petite enfance et programmes de bien-\u00eatre communautaire.',
+    cont_coord: 'Coordination des Services',
+    cont_coord_desc: 'Coordination des soins t\u00e9l\u00e9phonique ou en personne connectant les personnes et les familles avec des services appropri\u00e9s.',
+    cont_out: 'Soins Ambulatoires et Int\u00e9gr\u00e9s',
+    cont_out_desc: 'Th\u00e9rapie individuelle, de groupe et familiale; gestion des m\u00e9dicaments; et sant\u00e9 comportementale int\u00e9gr\u00e9e.',
+    cont_int: 'Services Intensifs \u00e0 Domicile et en Communaut\u00e9',
+    cont_int_desc: 'Services \u00e0 domicile, soins ambulatoires intensifs, hospitalisation partielle et coordination des soins globaux.',
+    cont_crisis: 'Soins de Crise Complets',
+    cont_crisis_desc: 'Ligne de crise 988, \u00e9quipes mobiles de crise, stabilisation de crise et services d\u2019h\u00e9bergement d\u2019urgence.',
+    cont_inp: 'Soins Hospitaliers',
+    cont_inp_desc: 'Traitement psychiatrique hospitalier aigu pour les personnes n\u00e9cessitant une supervision clinique 24h/24.',
+    cont_res: 'Traitement R\u00e9sidentiel',
+    cont_res_desc: 'PRTF, QRTP et maisons de groupe th\u00e9rapeutiques pour les jeunes n\u00e9cessitant des soins r\u00e9sidentiels structur\u00e9s.',
+    cont_peer: 'Services Dirig\u00e9s par les Pairs',
+    cont_peer_desc: 'Services dirig\u00e9s par les familles et les jeunes, y compris le soutien par les pairs pour les parents, le mentorat et la d\u00e9fense.',
+    defs_h1: 'D\u00e9finitions des Types de Service',
+    defs_p1: 'Comprendre ce que signifie chaque type de service peut vous aider \u00e0 identifier le niveau de soins appropri\u00e9.',
+    about_h1: '\u00c0 Propos de ce R\u00e9pertoire',
+    about_p1: 'Ce r\u00e9pertoire a \u00e9t\u00e9 d\u00e9velopp\u00e9 par le D\u00e9partement de la Sant\u00e9 et des Services Humains du Dakota du Nord, Division de la Sant\u00e9 Comportementale.',
+    about_p2: 'Couvre les comt\u00e9s de <strong>Benson, Cavalier, Eddy, Ramsey, Rolette et Towner</strong> dans la r\u00e9gion du lac du Dakota du Nord.',
+    about_p3: 'La R\u00e9gion 3 maintient une \u00e9troite relation de travail avec la <strong>Bande Turtle Mountain des Chippewa</strong> et la <strong>Nation Spirit Lake</strong>.',
+    about_contact_label: 'Contact Principal',
+    about_contact_name: 'Katie Houle, LMSW',
+    about_contact_title: 'Administratrice Clinique, Syst\u00e8me de Soins \u2014 Division de la Sant\u00e9 Comportementale du ND DHHS',
+    about_soc: 'Ce projet est soutenu par la <strong>subvention du Syst\u00e8me de Soins de l\u2019Initiative de Sant\u00e9 Mentale des Enfants (CMHI)</strong>.',
+    sidebar_categories: 'Cat\u00e9gories',
+    filter_setting: 'Cadre',
+    filter_all_settings: 'Tous les Cadres',
+    filter_age: 'Groupe d\u2019\u00c2ge',
+    filter_all_ages: 'Tous les \u00c2ges',
+    filter_city: 'Ville',
+    filter_all_cities: 'Toutes les Villes',
+    reset_filters: 'R\u00e9initialiser les Filtres',
+    btn_print: 'Imprimer',
+    btn_export: 'Exporter CSV',
+    btn_filters: 'Filtres',
+    saved_panel_title: 'Ressources Enregistr\u00e9es',
+    saved_empty: 'Aucune ressource enregistr\u00e9e. Cliquez sur l\u2019ic\u00f4ne de signet pour enregistrer.',
+    export_saved: 'Exporter la Liste Enregistr\u00e9e',
+  }
+};
+
+const SERVICE_DEFS = [
+  { name: 'Outpatient Services \u2014 Individual', def: 'One-on-one therapy sessions using evidence-based approaches such as DBT, CBT, Trauma-Focused CBT, EMDR, Child-Parent Psychotherapy, and Solution-Focused Brief Therapy.' },
+  { name: 'Outpatient Services \u2014 Group', def: 'Therapeutic groups for shared experiences, including CBITS, SPARCS, Seeking Safety, and Aggression Replacement Training (ART).' },
+  { name: 'Outpatient Services \u2014 Family', def: 'Family-centered therapy including Parent-Child Interaction Therapy (PCIT), Brief Strategic Family Therapy, and Multidimensional Family Therapy.' },
+  { name: 'Medication Management', def: 'Behavioral health medications prescribed by a pediatrician, child and adolescent psychiatrist, nurse practitioner, or physician assistant.' },
+  { name: 'Service Coordination / FOCUS', def: 'Telephonic or basic care coordination to connect individuals and families with appropriate services. FOCUS is an intensive care management model for children and youth with serious emotional disturbances.' },
+  { name: 'Intensive Care Coordination (Wraparound)', def: 'High Fidelity Wraparound \u2014 a structured, team-based planning process for youth with complex needs across multiple systems.' },
+  { name: 'Intensive In-Home Services', def: 'Services delivered in the home including Functional Family Therapy (FFT), Multisystemic Therapy (MST), Assertive Community Treatment (ACT), and First Episode Psychosis Care.' },
+  { name: 'Mobile Crisis Service', def: 'Mobile crisis response teams that go to the individual in the community to provide immediate mental health crisis intervention for children and youth.' },
+  { name: 'Crisis Call Line', def: '988 Suicide and Crisis Lifeline (call or text), community-based call lines, 911, or warmlines for non-emergency emotional support.' },
+  { name: 'Crisis Stabilization (23-hour / 1\u20135 days)', def: 'Short-term crisis stabilization services in a community setting to prevent hospitalization and restore stability.' },
+  { name: 'Inpatient Psychiatric Treatment', def: 'Acute inpatient psychiatric facilities providing 24-hour clinical supervision for individuals in severe mental health crisis.' },
+  { name: 'Psychiatric Residential Treatment (PRTF)', def: 'Psychiatric Residential Treatment Facilities for children and youth who require stabilization but not acute inpatient care.' },
+  { name: 'Qualified Residential Treatment Program (QRTP)', def: 'Qualified Residential Treatment Programs providing trauma-informed, clinically appropriate residential care for youth in child welfare.' },
+  { name: 'Peer-Led Services / Parent Peer Support', def: 'Family and youth-led services including education groups, mentoring, training, and advocacy. Parent Peer Support connects families with others who have lived experience navigating the behavioral health system.' },
+  { name: 'Recovery Support Services', def: 'Education support, vocational support, supported employment, and housing support services for individuals in recovery from substance use or mental health challenges.' },
+  { name: 'Skills Training / Psychosocial Rehabilitation', def: 'Building daily living, social, and coping skills. Includes Seeking Safety, ARC (Attachment Regulation and Competency), Botvin LifeSkills Training, and ART.' },
+  { name: 'Substance Abuse Treatment', def: 'Specialized assessment and treatment services for substance use disorders, including MAT (Medication-Assisted Treatment), detox, and intensive outpatient programs.' },
+];
+
+// ===================================================
+// STATE
+// ===================================================
+let state = {
+  lang: 'en',
+  search: '',
+  pathway: 'all',
+  category: 'all',
+  setting: '',
+  age: '',
+  city: '',
+  hashtag: '',
+  saved: new Set(JSON.parse(localStorage.getItem('r7_saved') || '[]')),
+  page: 1,
+  pageSize: 30,
+};
+
+const HASHTAGS_CONFIG = [
+  { tag: 'MentalHealth', label: '#MentalHealth', test: r => /mental health|behavioral health|outpatient|therapy|counseling|psychiatric/i.test([r.service_type, r.description, r.continuum_component].join(' ')) },
+  { tag: 'SubstanceUse', label: '#SubstanceUse', test: r => /substance|addiction|recovery|alcohol|drug|mat\b/i.test([r.service_type, r.description].join(' ')) },
+  { tag: 'YouthFamily', label: '#Youth & Family', test: r => /youth|child|family|parent|school|adolescent|juvenile/i.test([r.service_type, r.description, r.age_group].join(' ')) },
+  { tag: 'CrisisHelp', label: '#CrisisHelp', test: r => /crisis|988|emergency|shelter|hotline|stabilization/i.test([r.service_type, r.description, r.continuum_component].join(' ')) },
+  { tag: 'PeerSupport', label: '#PeerSupport', test: r => /peer|recovery support|mentoring/i.test([r.service_type, r.description].join(' ')) },
+  { tag: 'Housing', label: '#Housing', test: r => /housing|shelter|transitional|homeless/i.test([r.service_type, r.description].join(' ')) },
+  { tag: 'TribalServices', label: '#TribalServices', test: r => /tribal|standing rock|sisseton|wahpeton|native|indigenous/i.test([r.organization, r.service_type, r.description, ...(r.specialized_populations||[])].join(' ')) },
+  { tag: 'Telehealth', label: '#Telehealth', test: r => r.setting === 'Telehealth' || /telehealth|tele-health/i.test(r.service_type) },
+];
+
+// ===================================================
+// INIT
+// ===================================================
+function init() {
+  buildHashtags();
+  buildCategoryList();
+  buildCityFilter();
+  buildDefinitionsList();
+  applyFilters();
+  updateSavedCount();
+}
+
+function buildHashtags() {
+  const bar = document.getElementById('hashtagBar');
+  HASHTAGS_CONFIG.forEach(h => {
+    const count = ATLAS_DATA.filter(r => h.test(r)).length;
+    if (count === 0) return;
+    const btn = document.createElement('button');
+    btn.className = 'hashtag';
+    btn.textContent = h.label;
+    btn.dataset.tag = h.tag;
+    btn.onclick = () => toggleHashtag(h.tag, btn);
+    bar.appendChild(btn);
+  });
+}
+
+function buildCategoryList() {
+  const container = document.getElementById('categoryList');
+  const counts = {};
+  ATLAS_DATA.forEach(r => { counts[r.category] = (counts[r.category] || 0) + 1; });
+  const cats = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.id = 'cat-all';
+  allBtn.innerHTML = `<span class="cat-name">All Categories</span><span class="cat-count">${ATLAS_DATA.length}</span>`;
+  allBtn.onclick = () => setCategory('all', allBtn);
+  container.appendChild(allBtn);
+  cats.forEach(([cat, count]) => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.dataset.cat = cat;
+    btn.innerHTML = `<span class="cat-name">${cat}</span><span class="cat-count">${count}</span>`;
+    btn.onclick = () => setCategory(cat, btn);
+    container.appendChild(btn);
+  });
+}
+
+function buildCityFilter() {
+  const sel = document.getElementById('cityFilter');
+  const cities = [...new Set(ATLAS_DATA.map(r => r.city).filter(c => c && c.length < 40))].sort();
+  cities.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function buildDefinitionsList() {
+  const container = document.getElementById('definitions-list');
+  SERVICE_DEFS.forEach(d => {
+    const div = document.createElement('div');
+    div.className = 'def-item';
+    div.innerHTML = `<h5>${d.name}</h5><p>${d.def}</p>`;
+    container.appendChild(div);
+  });
+}
+
+// ===================================================
+// FILTER LOGIC
+// ===================================================
+function getFiltered() {
+  const q = state.search.toLowerCase().trim();
+  return ATLAS_DATA.filter(r => {
+    if (state.pathway !== 'all' && r.pathway !== state.pathway) return false;
+    if (state.category !== 'all' && r.category !== state.category) return false;
+    if (state.setting && r.setting !== state.setting) return false;
+    if (state.age && r.age_group !== state.age) return false;
+    if (state.city && r.city !== state.city) return false;
+    if (state.hashtag) {
+      const hc = HASHTAGS_CONFIG.find(h => h.tag === state.hashtag);
+      if (hc && !hc.test(r)) return false;
+    }
+    if (q) {
+      const hay = [r.organization, r.service_type, r.description, r.city, r.category, r.continuum_component, r.contact, ...(r.specialized_populations||[])].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function applyFilters() {
+  state.setting = document.getElementById('settingFilter').value;
+  state.age = document.getElementById('ageFilter').value;
+  state.city = document.getElementById('cityFilter').value;
+  state.page = 1;
+  renderAll();
+}
+
+function renderAll() {
+  const filtered = getFiltered();
+  const total = filtered.length;
+  const shown = filtered.slice(0, state.page * state.pageSize);
+  document.getElementById('resultsCount').innerHTML = `<strong>${total}</strong> <span>result${total !== 1 ? 's' : ''}</span>`;
+  const grid = document.getElementById('resourceGrid');
+  if (total === 0) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><h3>No resources found</h3><p>Try adjusting your search or filters.</p></div>`;
+    return;
+  }
+  grid.innerHTML = shown.map(r => renderCard(r)).join('');
+  if (shown.length < total) {
+    grid.innerHTML += `<div class="load-more-wrap"><button class="load-more-btn" onclick="loadMore()">Load more (${total - shown.length} remaining)</button></div>`;
+  }
+}
+
+function renderCard(r) {
+  const isSaved = state.saved.has(r.id);
+  const regionBadge = r.region === 'Statewide'
+    ? `<span class="region-badge statewide">Statewide</span>`
+    : `<span class="region-badge r7">Region 7</span>`;
+  const specPops = r.specialized_populations && r.specialized_populations.length > 0
+    ? r.specialized_populations.map(p => `<span class="spec-pop-tag">${p}</span>`).join('')
+    : '';
+  return `
+    <div class="resource-card" onclick="openModal(${r.id})">
+      <div class="card-category">${r.category}</div>
+      <div class="card-name">${r.organization}</div>
+      ${r.service_type ? `<div class="card-service">${r.service_type}</div>` : ''}
+      <div class="card-meta">
+        ${r.city ? `<span class="meta-chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${r.city}</span>` : ''}
+        ${r.setting ? `<span class="meta-chip">${r.setting}</span>` : ''}
+        ${r.age_group ? `<span class="meta-chip">${r.age_group}</span>` : ''}
+        ${regionBadge}
+      </div>
+      ${specPops ? `<div style="display:flex;flex-wrap:wrap;gap:4px;">${specPops}</div>` : ''}
+      ${r.description ? `<div class="card-desc">${r.description}</div>` : ''}
+      <div class="card-footer">
+        <div class="card-actions">
+          ${r.phone ? `<a class="card-btn call" href="tel:${r.phone.replace(/\D/g,'')}" onclick="event.stopPropagation()">Call</a>` : ''}
+          ${r.email ? `<a class="card-btn email" href="mailto:${r.email}" onclick="event.stopPropagation()">Email</a>` : ''}
+        </div>
+        <button class="save-btn ${isSaved ? 'saved' : ''}" onclick="event.stopPropagation(); toggleSave(${r.id})" title="${isSaved ? 'Remove from saved' : 'Save resource'}">
+          <svg viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+    </div>`;
+}
+
+function loadMore() { state.page++; renderAll(); }
+
+// ===================================================
+// MODAL
+// ===================================================
+function openModal(id) {
+  const r = ATLAS_DATA.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('modalCategory').textContent = r.category;
+  document.getElementById('modalTitle').textContent = r.organization;
+  const isSaved = state.saved.has(r.id);
+  const specPops = r.specialized_populations && r.specialized_populations.length > 0
+    ? `<div class="modal-field"><span class="modal-field-label">Specialized Populations</span><div class="spec-pop-tags">${r.specialized_populations.map(p => `<span class="spec-pop-tag">${p}</span>`).join('')}</div></div>` : '';
+  const fields1 = [
+    r.service_type && ['Service Type', r.service_type],
+    r.continuum_component && ['Continuum Component', r.continuum_component],
+    r.setting && ['Setting', r.setting],
+    r.age_group && ['Target Population', r.age_group],
+  ].filter(Boolean);
+  const fields2 = [
+    (r.address || r.city) && ['Location', [r.address, r.city, r.zip].filter(Boolean).join(', ')],
+    r.phone && ['Phone', `<a href="tel:${r.phone.replace(/\D/g,'')}">${r.phone}</a>`],
+    r.email && ['Email', `<a href="mailto:${r.email}">${r.email}</a>`],
+    r.contact && ['Contact Person', r.contact],
+    r.payment && ['Payment Accepted', r.payment],
+    r.evidence_based && ['Evidence-Based Programs', r.evidence_based],
+    r.other_info && ['Additional Information', r.other_info],
+    r.region && ['Region', r.region],
+    r.source && ['Source', r.source],
+  ].filter(Boolean);
+  document.getElementById('modalBody').innerHTML = `
+    ${r.description ? `<div class="modal-field"><span class="modal-field-label">About This Service</span><div class="modal-field-value">${r.description}</div></div>` : ''}
+    <div class="modal-grid">${fields1.map(([l,v]) => `<div class="modal-field"><span class="modal-field-label">${l}</span><div class="modal-field-value">${v}</div></div>`).join('')}</div>
+    ${specPops}
+    ${fields2.map(([l,v]) => `<div class="modal-field"><span class="modal-field-label">${l}</span><div class="modal-field-value">${v}</div></div>`).join('')}
+    <div class="modal-actions">
+      ${r.phone ? `<a class="modal-btn modal-btn-primary" href="tel:${r.phone.replace(/\D/g,'')}">Call ${r.phone}</a>` : ''}
+      ${r.email ? `<a class="modal-btn modal-btn-secondary" href="mailto:${r.email}">Send Email</a>` : ''}
+      <button class="modal-btn modal-btn-secondary" id="modal-save-btn" onclick="toggleSave(${r.id}); updateModalSaveBtn(${r.id})">${isSaved ? 'Saved' : 'Save Resource'}</button>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateModalSaveBtn(id) {
+  const btn = document.getElementById('modal-save-btn');
+  if (btn) btn.textContent = state.saved.has(id) ? 'Saved' : 'Save Resource';
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function closeModalOutside(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+// ===================================================
+// CONTROLS
+// ===================================================
+function onSearch(input) {
+  state.search = input.value;
+  document.getElementById('searchClear').classList.toggle('visible', input.value.length > 0);
+  state.page = 1;
+  renderAll();
+}
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  state.search = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  state.page = 1;
+  renderAll();
+}
+function setPathway(pathway, el) {
+  state.pathway = pathway; state.page = 1;
+  document.querySelectorAll('.pathway-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderAll();
+}
+function setCategory(cat, el) {
+  state.category = cat; state.page = 1;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderAll();
+}
+function filterByContinuum(cat) {
+  state.category = cat; state.page = 1;
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  document.getElementById('cat-all').classList.toggle('active', false);
+  renderAll();
+  // Close edu panel
+  document.getElementById('edu-body').classList.remove('open');
+  document.getElementById('edu-chevron').classList.remove('open');
+}
+function toggleHashtag(tag, btn) {
+  if (state.hashtag === tag) { state.hashtag = ''; btn.classList.remove('active'); }
+  else { state.hashtag = tag; document.querySelectorAll('.hashtag').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+  state.page = 1;
+  renderAll();
+}
+function resetAll() {
+  state.search = ''; state.pathway = 'all'; state.category = 'all';
+  state.setting = ''; state.age = ''; state.city = ''; state.hashtag = '';
+  state.page = 1;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  document.getElementById('settingFilter').value = '';
+  document.getElementById('ageFilter').value = '';
+  document.getElementById('cityFilter').value = '';
+  document.querySelectorAll('.pathway-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('[data-pathway="all"]').classList.add('active');
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-all').classList.add('active');
+  document.querySelectorAll('.hashtag').forEach(b => b.classList.remove('active'));
+  renderAll();
+}
+
+// ===================================================
+// SAVE
+// ===================================================
+function toggleSave(id) {
+  if (state.saved.has(id)) { state.saved.delete(id); } else { state.saved.add(id); }
+  localStorage.setItem('r7_saved', JSON.stringify([...state.saved]));
+  updateSavedCount();
+  renderAll();
+  renderSavedPanel();
+}
+function updateSavedCount() {
+  const el = document.getElementById('savedCount');
+  el.textContent = state.saved.size;
+  el.classList.toggle('visible', state.saved.size > 0);
+}
+function toggleSavedPanel() {
+  document.getElementById('savedPanel').classList.toggle('open');
+  renderSavedPanel();
+}
+function renderSavedPanel() {
+  const body = document.getElementById('savedPanelBody');
+  if (state.saved.size === 0) {
+    body.innerHTML = `<div class="saved-empty">${T[state.lang].saved_empty}</div>`;
+    return;
+  }
+  const items = [...state.saved].map(id => ATLAS_DATA.find(r => r.id === id)).filter(Boolean);
+  body.innerHTML = items.map(r => `
+    <div class="saved-item" onclick="openModal(${r.id})">
+      <div class="saved-item-name">${r.organization}</div>
+      <div class="saved-item-cat">${r.category}</div>
+      ${r.phone ? `<div class="saved-item-phone">${r.phone}</div>` : ''}
+    </div>`).join('');
+}
+function exportSaved() {
+  const items = [...state.saved].map(id => ATLAS_DATA.find(r => r.id === id)).filter(Boolean);
+  if (items.length === 0) return;
+  const headers = ['Organization','Category','Service Type','City','Phone','Email','Payment'];
+  const rows = items.map(r => [r.organization, r.category, r.service_type, r.city, r.phone, r.email, r.payment].map(v => `"${(v||'').replace(/"/g,'""')}"`));
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'region7_saved_resources.csv';
+  a.click();
+}
+
+// ===================================================
+// EDUCATION PANEL
+// ===================================================
+function toggleEduPanel() {
+  const body = document.getElementById('edu-body');
+  const chevron = document.getElementById('edu-chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+}
+function showEduTab(tab, btn) {
+  document.querySelectorAll('.edu-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.edu-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('edu-' + tab).classList.add('active');
+}
+
+// ===================================================
+// THEME
+// ===================================================
+function toggleDark() {
+  const html = document.documentElement;
+  const isDark = html.dataset.theme === 'dark';
+  html.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('dark-btn').textContent = isDark ? '\u263E' : '\u2600';
+}
+
+// ===================================================
+// LANGUAGE
+// ===================================================
+function setLang(lang) {
+  state.lang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.documentElement.lang = lang;
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  renderSavedPanel();
+}
+
+// ===================================================
+// EXPORT
+// ===================================================
+function exportCSV() {
+  const filtered = getFiltered();
+  const headers = ['Organization','Category','Service Type','Setting','Age Group','City','Phone','Email','Description','Payment'];
+  const rows = filtered.map(r => [r.organization, r.category, r.service_type, r.setting, r.age_group, r.city, r.phone, r.email, r.description, r.payment].map(v => `"${(v||'').replace(/"/g,'""')}"`));
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'region7_resources.csv';
+  a.click();
+}
+
+// ===================================================
+// MOBILE
+// ===================================================
+function toggleMobileSidebar() {
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+}
+
+// ===================================================
+// KEYBOARD
+// ===================================================
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ===================================================
+// START
+// ===================================================
+init();
+</script>
+</body>
+</html>
